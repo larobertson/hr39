@@ -70,27 +70,35 @@ const gameOfLife = function(board) {
   
   //iterate over matrix
   let cell;
-  let count;
+  let count = 0;
   for (let r = 0; r < board.length; r++) {
       for (let c = 0; c < board[r].length; c++) {
           count = liveCount(board, r, c);
-          
           cell = board[r][c];
           if (cell === 0) {
-              //do this
+              if (count === 3) {
+                  board[r][c] = 'b';
+              }
               
           } else if (cell === 1) {
-              //do this
+              if (count < 2 || count > 3) {
+                  board[r][c] = 'd';
+              }
           }
       }
   }
+  
+  //now go back through the board, and change all d's to 0 and all b's to 1
+  //then return it
+  let gol = nextGen(board);
+  return gol;
 };
 
 const liveCount = (board, r, c) => {
   let count = 0;
       //look around
   if (board[r - 1]) { //look up
-      if (board[r - 1] === 1 || board[r - 1] === 'd') {
+      if (board[r - 1][c] === 1 || board[r - 1][c] === 'd') {
           count += 1;
       }
       if (board[r - 1][c - 1]) {
@@ -105,7 +113,7 @@ const liveCount = (board, r, c) => {
       }
   }
   if (board[r + 1]) { //look down
-      if (board[r + 1] === 1 || board[r + 1] === 'd') {
+      if (board[r + 1][c] === 1 || board[r + 1][c] === 'd') {
           count += 1;
       }
       if (board[r + 1][c - 1]) {
@@ -130,4 +138,18 @@ const liveCount = (board, r, c) => {
       }
   }
   return count;
+};
+
+const nextGen = (board) => {
+  for (let r = 0; r < board.length; r++) {
+      for (let c = 0; c < board[r].length; c++) {
+          let cell = board[r][c];
+          if (cell === 'b') {
+              board[r][c] = 1;
+          } else if (cell === 'd') {
+              board[r][c] = 0;
+          }
+      }
+  }
+  return board;
 }
