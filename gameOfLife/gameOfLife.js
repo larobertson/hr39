@@ -52,6 +52,11 @@ var gameOfLife = function(board) {
     //down, down - 1 & down + 1
     //left
     //right
+  
+  //if zero do this
+    //if cell === 0 && count === 3
+        //cell marked as b
+  //if 1 do this
     //keep a count of live cells (current 1's)
       //count BOTH 1's and d's
         //this should account for cells that will die
@@ -59,11 +64,20 @@ var gameOfLife = function(board) {
         //cell remains a 1
       //if count is > 3 || < 2
         //cell marked as d
-      //if cell === 0 && count === 3
-        //cell marked as b
   
   //then go back through the matrix and if it is a d mark it as 0
   //if it is a b mark it as a 1
   
-  
+  //iterate over matrix
+  let cell;
+  for (let r = 0; r < board.length; r++) {
+      for (let c = 0; c < board[r].length; c++) {
+          cell = board[r][c];
+          if (cell === 0) {
+              //do this
+          } else if (cell === 1) {
+              //do this
+          }
+      }
+  }
 };
