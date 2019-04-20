@@ -70,8 +70,51 @@ var gameOfLife = function(board) {
   
   //iterate over matrix
   let cell;
+  let count = 0;
   for (let r = 0; r < board.length; r++) {
       for (let c = 0; c < board[r].length; c++) {
+          //look around
+          if (board[r - 1]) { //look up
+              if (board[r - 1] === 1) {
+                  count += 1;
+              }
+              if (board[r - 1][c - 1]) {
+                  if (board[r - 1][c - 1] === 1) {
+                      count += 1;
+                  }
+              }
+              if (board[r - 1][c + 1]) {
+                  if (board[r - 1][c + 1] === 1) {
+                      count += 1;
+                  }
+              }
+          }
+          if (board[r + 1]) { //look down
+              if (board[r + 1] === 1) {
+                  count += 1;
+              }
+              if (board[r + 1][c - 1]) {
+                  if (board[r + 1][c - 1] === 1) {
+                      count += 1;
+                  }
+              }
+              if (board[r + 1][c + 1]) {
+                  if (board[r + 1][c + 1] === 1) {
+                      count += 1;
+                  }
+              }
+          }
+          if (board[r][c - 1]) { //look left
+              if (board[r][c - 1] === 1) {
+                  count += 1;
+              }
+          }
+           if (board[r][c + 1]) { //look right
+              if (board[r][c + 1] === 1) {
+                  count += 1;
+              }
+          }
+          
           cell = board[r][c];
           if (cell === 0) {
               //do this
