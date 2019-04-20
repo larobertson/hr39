@@ -69,3 +69,56 @@ LRUCache.prototype.put = function(key, value) {
 //any time these are called, the key goes to the end of the line, to the most recently used cache
 //once the cache fills up and a new put is used
   //the LRU cache is deleted, and the new put is added to the end of the line (MRU cache)
+
+const ListNode = function(key, value){
+  this.key = key;
+  this.val = value;
+  this.prev = null;
+  this.next = null;
+}
+
+
+class DoublyLinkedList {
+  constructor() {
+      this.head = null;
+      this.tail = null;
+  }
+  
+  addToTail(key, value, item = null) {
+      let node = item || new ListNode(key, value)
+      
+      if (!this.tail) {
+          //empty list: make node both head and tail
+          this.head = node;
+          this.tail = node;
+      } else {
+          node.prev = this.tail;
+          this.tail.next = node;
+          this.tail = node;
+      }
+      return node;
+  }
+  
+  removeFromHead () {
+      //handle edge cases
+      if (!this.head) {
+          return null;
+      }
+      
+      const toRemove = this.head;
+      if (this.head === this.tail) {
+          //if list is only one in length;
+          this.head = null;
+          this.tail = null;
+      } else {
+          this.head = this.head.next;
+          this.head.prev = null; 
+      }
+      return toRemove;
+     
+  }
+  
+  moveToTail () {
+      //after get move node to tail
+  }
+}
