@@ -41,7 +41,7 @@
  * @param {number[][]} board
  * @return {void} Do not return anything, modify board in-place instead.
  */
-var gameOfLife = function(board) {
+const gameOfLife = function(board) {
   //similar to flood fill ---> diagonals seem to count too
     //if cell dies make it a d
     //if cell lives keep it a 1
@@ -70,57 +70,64 @@ var gameOfLife = function(board) {
   
   //iterate over matrix
   let cell;
-  let count = 0;
+  let count;
   for (let r = 0; r < board.length; r++) {
       for (let c = 0; c < board[r].length; c++) {
-          //look around
-          if (board[r - 1]) { //look up
-              if (board[r - 1] === 1) {
-                  count += 1;
-              }
-              if (board[r - 1][c - 1]) {
-                  if (board[r - 1][c - 1] === 1) {
-                      count += 1;
-                  }
-              }
-              if (board[r - 1][c + 1]) {
-                  if (board[r - 1][c + 1] === 1) {
-                      count += 1;
-                  }
-              }
-          }
-          if (board[r + 1]) { //look down
-              if (board[r + 1] === 1) {
-                  count += 1;
-              }
-              if (board[r + 1][c - 1]) {
-                  if (board[r + 1][c - 1] === 1) {
-                      count += 1;
-                  }
-              }
-              if (board[r + 1][c + 1]) {
-                  if (board[r + 1][c + 1] === 1) {
-                      count += 1;
-                  }
-              }
-          }
-          if (board[r][c - 1]) { //look left
-              if (board[r][c - 1] === 1) {
-                  count += 1;
-              }
-          }
-           if (board[r][c + 1]) { //look right
-              if (board[r][c + 1] === 1) {
-                  count += 1;
-              }
-          }
+          count = liveCount(board, r, c);
           
           cell = board[r][c];
           if (cell === 0) {
               //do this
+              
           } else if (cell === 1) {
               //do this
           }
       }
   }
 };
+
+const liveCount = (board, r, c) => {
+  let count = 0;
+      //look around
+  if (board[r - 1]) { //look up
+      if (board[r - 1] === 1 || board[r - 1] === 'd') {
+          count += 1;
+      }
+      if (board[r - 1][c - 1]) {
+          if (board[r - 1][c - 1] === 1 || board[r - 1][c - 1] === 'd') {
+              count += 1;
+          }
+      }
+      if (board[r - 1][c + 1]) {
+          if (board[r - 1][c + 1] === 1 || board[r - 1][c + 1] === 'd') {
+              count += 1;
+          }
+      }
+  }
+  if (board[r + 1]) { //look down
+      if (board[r + 1] === 1 || board[r + 1] === 'd') {
+          count += 1;
+      }
+      if (board[r + 1][c - 1]) {
+          if (board[r + 1][c - 1] === 1 || board[r + 1][c - 1] === 'd') {
+              count += 1;
+          }
+      }
+      if (board[r + 1][c + 1]) {
+          if (board[r + 1][c + 1] === 1 || board[r + 1][c + 1] === 'd') {
+              count += 1;
+          }
+      }
+  }
+  if (board[r][c - 1]) { //look left
+      if (board[r][c - 1] === 1 || board[r][c - 1] === 'd') {
+          count += 1;
+      }
+  }
+   if (board[r][c + 1]) { //look right
+      if (board[r][c + 1] === 1 || board[r][c + 1] === 'd') {
+          count += 1;
+      }
+  }
+  return count;
+}
