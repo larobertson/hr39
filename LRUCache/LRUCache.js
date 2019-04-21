@@ -47,15 +47,15 @@ LRUCache.prototype.get = function(key) {
   let node = this.storage[key];
   
   if (this.dll.tail === node) {
-      return node;
+      return node.val;
   }
   
-  if (node) {
-      this.dll.moveToTail(node);
-      return node.value;
-  } else {
+  if (!node) {
       return -1;
   }
+  
+  this.dll.moveToTail(node);
+  return node.val;
 };
 
 /** 
@@ -73,10 +73,11 @@ LRUCache.prototype.put = function(key, value) {
       return this.get(key);
   }
   
-  if (this.capacity) { //decrement capacity each time
+  if (this.capacity > 0) { //decrement capacity each time
       const node = this.dll.addToTail(key, value);
-      this.storage[key] = node.val
+      this.storage[key] = node;
       this.capacity--;
+      return;
   } 
       //remove one from head & delete from storage
       //add this to tail & storage
