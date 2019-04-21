@@ -30,8 +30,9 @@
 const LRUCache = function(capacity) {
   //this is the cache constructor
   //capacity is how much it can hold in storage  
+  this.dll = new DoublyLinkedList(); //each Cache will have access to a list
   this.capacity = capacity
-  this.storage = {};
+  this.storage = {}; //this will be used for constant time lookup, not LRU/MRU
 };
 
 /** 
@@ -43,6 +44,18 @@ LRUCache.prototype.get = function(key) {
   //if key exists return its value
   //if it doesn't, return -1
   //move key to the tail of the cache
+  let node = this.storage[key];
+  
+  if (this.dll.tail === node) {
+      return node;
+  }
+  
+  if (node) {
+      this.dll.moveToTail(node);
+      return node.value;
+  } else {
+      return -1;
+  }
 };
 
 /** 
