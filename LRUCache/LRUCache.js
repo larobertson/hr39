@@ -68,6 +68,24 @@ LRUCache.prototype.put = function(key, value) {
   //if not check if cache is at capacity
     //if no, add to tail and decrement capacity
     //if yes, remove head (LRU), and add to tail
+  if (this.storage[key] !== undefined) {
+      this.storage[key].val = value;
+      return this.get(key);
+  }
+  
+  if (this.capacity) { //decrement capacity each time
+      const node = this.dll.addToTail(key, value);
+      this.storage[key] = node.val
+      this.capacity--;
+  } 
+      //remove one from head & delete from storage
+      //add this to tail & storage
+      let lru = this.dll.removeFromHead();
+      delete this.storage[lru.key]
+      
+  
+      const node = this.dll.addToTail(key, value);
+      this.storage[key] = node;
 };
 
 /** 
@@ -76,12 +94,6 @@ LRUCache.prototype.put = function(key, value) {
 * var param_1 = obj.get(key)
 * obj.put(key,value)
 */
-
-//An LRUCache is created
-//It can get an existing key or put a new key
-//any time these are called, the key goes to the end of the line, to the most recently used cache
-//once the cache fills up and a new put is used
-  //the LRU cache is deleted, and the new put is added to the end of the line (MRU cache)
 
 const ListNode = function(key, value){
   this.key = key;
@@ -98,7 +110,7 @@ class DoublyLinkedList {
   }
   
   addToTail(key, value, item = null) {
-      let node = item || new ListNode(key, value)
+      const node = item || new ListNode(key, value)
       
       if (!this.tail) {
           //empty list: make node both head and tail
