@@ -29,7 +29,7 @@
  */
 const LRUCache = function(capacity) {
   //this is the cache constructor
-  //capacity is how much it can hold in storage
+  //capacity is how much it can hold in storage  
   this.capacity = capacity
   this.storage = {};
 };
@@ -118,7 +118,26 @@ class DoublyLinkedList {
      
   }
   
-  moveToTail () {
-      //after get move node to tail
+  moveToTail (node) {
+      if (this.tail === node) {
+          return node;
+      }
+      
+      //if node is tail just return node
+      //if it's head, follow remove from head then add to tail
+      if (this.head === node) {
+          this.removeFromHead();
+      }
+      
+      //reassign prev and next (with destructuring)
+      const {prev, next} = node;
+      if (prev) {
+          prev.next = next;
+      }
+      if (next) {
+          next.prev = prev;
+      }
+      
+      return this.addToTail(null, null, node); 
   }
 }
