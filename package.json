@@ -4,7 +4,12 @@
   "description": "Series of toy problems with tests",
   "main": "characterFrequency.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:watch": "mocha --watch $npm_package_config_mocha",
+    "test:debug": "mocha --inspect-brk $npm_package_config_mocha"
+  },
+  "config": {
+    "mocha": "hackerrank/**/test.js"
   },
   "repository": {
     "type": "git",
