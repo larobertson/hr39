@@ -5,7 +5,7 @@ module.exports = function (arr) {
   let swap = 0;
   for (let i = 0; i < arr.length - 1; i++) {
     if (arr[i] !== i + 1) {
-      for (let k = i; k < arr.length; k++) {
+      while(arr[k] !== i + 1) {
         if (arr[k] === i + 1) {
           [arr[i], arr[k]] = [arr[k], arr[i]]
           swap++;
@@ -15,3 +15,10 @@ module.exports = function (arr) {
   }
   return swap;
 }
+
+// for (let k = i; k < arr.length; k++) {
+//   if (arr[k] === i + 1) {
+//     [arr[i], arr[k]] = [arr[k], arr[i]]
+//     swap++;
+//   }
+// }
