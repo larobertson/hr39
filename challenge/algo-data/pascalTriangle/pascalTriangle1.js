@@ -44,3 +44,7 @@ var generate = function(numRows, row, triangle) {
   }
   return triangle;
 };
+
+module.exports = {
+  generate: generate
+}

@@ -9,7 +9,7 @@
     "test:debug": "mocha --inspect-brk $npm_package_config_mocha"
   },
   "config": {
-    "mocha": "hackerrank/**/test.js"
+    "mocha": "challenge/hackerrank/**/test.js"
   },
   "repository": {
     "type": "git",
